@@ -3,5 +3,11 @@
     <string name="list_kosong">Belum ada data</string>
     <string name="x_diklik">%1$s diklik!</string>
     <string name="tambah_tugas">Tambah Tugas</string>
-    <string name="belum">Belum bisa menambahkan list</string>
+    <string name="judul">Judul Tugas</string>
+    <string name="deskripsi">Deskripsi Tugas</string>
+    <string name="kembali">Kembali</string>
+    <string name="simpan">Simpan</string>
+    <string name="edit">Ubah daftar tugas</string>
+    <string name="lainnya">Opsi lainnya</string>
+    <string name="hapus">Hapus daftar tugas</string>
 </resources>
