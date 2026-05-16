@@ -11,5 +11,6 @@ data class Tugas(
     val deskripsi: String,
     val mataKuliah: String,
     val tanggal: String,
-    val selesai: Boolean
+    val selesai: Boolean,
+    val isDeleted: Boolean = false
 )

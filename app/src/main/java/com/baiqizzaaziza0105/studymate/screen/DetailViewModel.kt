@@ -27,7 +27,8 @@ class DetailViewModel(private val dao: TugasDao) : ViewModel() {
             deskripsi = isi,
             mataKuliah = mataKuliah,
             tanggal = formatter.format(Date()),
-            selesai = false
+            selesai = false,
+            isDeleted = false
         )
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -52,7 +53,8 @@ class DetailViewModel(private val dao: TugasDao) : ViewModel() {
             deskripsi = isi,
             mataKuliah = mataKuliah,
             tanggal = formatter.format(Date()),
-            selesai = false
+            selesai = false,
+            isDeleted = false
         )
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -62,7 +64,13 @@ class DetailViewModel(private val dao: TugasDao) : ViewModel() {
 
     fun delete(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            dao.deleteById(id)
+            dao.softDelete(id)
+        }
+    }
+
+    fun restore(id: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dao.restore(id)
         }
     }
 }

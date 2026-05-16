@@ -10,9 +10,17 @@ import kotlinx.coroutines.flow.stateIn
 
 class MainViewModel(dao: TugasDao) : ViewModel() {
 
-    val data: StateFlow<List<Tugas>> = dao.getTugas().stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
-        initialValue = emptyList()
-    )
+    val data: StateFlow<List<Tugas>> =
+        dao.getTugas().stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = emptyList()
+        )
+
+    val deletedData: StateFlow<List<Tugas>> =
+        dao.getDeletedTugas().stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = emptyList()
+        )
 }

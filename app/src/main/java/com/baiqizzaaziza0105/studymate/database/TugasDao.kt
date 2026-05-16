@@ -16,12 +16,21 @@ interface TugasDao {
     @Update
     suspend fun update(tugas: Tugas)
 
-    @Query("SELECT * FROM tugas ORDER BY tanggal DESC")
+    @Query("SELECT * FROM tugas WHERE isDeleted = 0 ORDER BY tanggal DESC")
     fun getTugas(): Flow<List<Tugas>>
+
+    @Query(" SELECT * FROM tugas WHERE isDeleted = 1 ORDER BY tanggal DESC")
+    fun getDeletedTugas(): Flow<List<Tugas>>
 
     @Query("SELECT * FROM tugas WHERE id = :id")
     suspend fun getTugasById(id: Long): Tugas?
 
+    @Query("UPDATE tugas SET isDeleted = 1 WHERE id = :id")
+    suspend fun softDelete(id: Long)
+
+    @Query(" UPDATE tugas SET isDeleted = 0 WHERE id = :id ")
+    suspend fun restore(id: Long)
+
     @Query("DELETE FROM tugas WHERE id = :id")
-    suspend fun deleteById(id: Long)
+    suspend fun deletePermanent(id: Long)
 }

@@ -57,6 +57,7 @@ fun DetailScreen(
     var judul by remember { mutableStateOf("") }
     var deskripsi by remember { mutableStateOf("") }
     var mataKuliah by remember { mutableStateOf("") }
+    var showDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
 
@@ -164,11 +165,8 @@ fun DetailScreen(
                     }
 
                     if (id != null) {
-
                         DeleteAction {
-
-                            viewModel.delete(id)
-                            navController.popBackStack()
+                            showDialog = true
                         }
                     }
                 }
@@ -180,15 +178,21 @@ fun DetailScreen(
         FormTugas(
             title = judul,
             onTitleChange = { judul = it },
-
             desc = deskripsi,
             onDescChange = { deskripsi = it },
-
             matkul = mataKuliah,
             onMatkulChange = { mataKuliah = it },
-
             modifier = Modifier.padding(padding)
         )
+        if (id != null && showDialog) {
+            DisplayAlertDialog(
+                onDismissRequest = { showDialog = false }
+            ) {
+                showDialog = false
+                viewModel.delete(id)
+                navController.popBackStack()
+            }
+        }
     }
 }
 
@@ -198,7 +202,6 @@ fun DeleteAction(delete: () -> Unit) {
     var expanded by remember {
         mutableStateOf(false)
     }
-
     IconButton(
         onClick = {
             expanded = true
@@ -207,26 +210,20 @@ fun DeleteAction(delete: () -> Unit) {
 
         Icon(
             imageVector = Icons.Filled.MoreVert,
-
-            contentDescription =
-                stringResource(R.string.lainnya),
-
+            contentDescription = stringResource(R.string.lainnya),
             tint = MaterialTheme.colorScheme.primary
         )
     }
-
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = {
             expanded = false
         }
     ) {
-
         DropdownMenuItem(
             text = {
                 Text(text = stringResource(R.string.hapus))
             },
-
             onClick = {
                 expanded = false
                 delete()
@@ -239,13 +236,10 @@ fun DeleteAction(delete: () -> Unit) {
 fun FormTugas(
     title: String,
     onTitleChange: (String) -> Unit,
-
     desc: String,
     onDescChange: (String) -> Unit,
-
     matkul: String,
     onMatkulChange: (String) -> Unit,
-
     modifier: Modifier = Modifier
 ) {
 

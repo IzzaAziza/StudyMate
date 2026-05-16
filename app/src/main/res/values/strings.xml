@@ -10,4 +10,9 @@
     <string name="edit">Ubah daftar tugas</string>
     <string name="lainnya">Opsi lainnya</string>
     <string name="hapus">Hapus daftar tugas</string>
+    <string name="pesan_hapus">Hapus daftar tugas ini?</string>
+    <string name="tombol_hapus">Hapus</string>
+    <string name="tombol_batal">Batal</string>
+    <string name="list">Tampilan list</string>
+    <string name="grid">Tampilan grid</string>
 </resources>
